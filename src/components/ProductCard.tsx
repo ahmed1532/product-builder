@@ -2,6 +2,7 @@ import Image from "./Image";
 import Button from "./ui/Button";
 import { IProduct } from "../interfaces";
 import { slicer } from "../utils/functions";
+import CircleColor from "./ui/CircleColor";
 
 interface IProps {
   product: IProduct;
@@ -20,9 +21,10 @@ const ProductCard = ({ product }: IProps) => {
       <p>{slicer(description)}</p>
       <div className="flex items-center my-4 space-x-2">
         {colors.map((color) => (
-          <span
+          <CircleColor
             key={color}
-            className={` w-5 h-5 bg-${color} rounded-full cursor-pointer `}
+            color={color}
+    
           />
         ))}
       </div>
