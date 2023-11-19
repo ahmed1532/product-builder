@@ -3,12 +3,14 @@ export const validateProduct = (product: {
   description: string;
   imageURL: string;
   price: string;
+  colors: string[];
 }) => {
   const errors = {
     title: "",
     description: "",
     imageURL: "",
     price: "",
+    colors: "",
   };
 
   const validURL = /^(ftp|http|https):\/\/[^ "]+$/.test(product.imageURL);
@@ -32,6 +34,11 @@ export const validateProduct = (product: {
   }
   if (!product.price.trim() || isNaN(Number(product.price))) {
     errors.price = "Product price must be numbers only";
+  }
+  if (product.colors.length == 0) {
+   
+
+    errors.colors = "At least one color must be selected";
   }
 
   return errors;
