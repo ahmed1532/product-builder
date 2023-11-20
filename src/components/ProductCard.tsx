@@ -33,7 +33,7 @@ const ProductCard = ({
   };
 
   return (
-    <div className="p-3 border max-w-sm md:max-w-lg mx-auto md:mx-0">
+    <div className="p-3 border max-w-sm md:max-w-lg mx-auto md:mx-0 overflow-hidden">
       <Image
         imageUrl={imageURL}
         alt={product.title}
