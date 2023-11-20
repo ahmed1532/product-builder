@@ -39,7 +39,7 @@ const ProductCard = ({
         alt={product.title}
         className="w-full mb-2 rounded-md h-48"
       />
-      <h3 className="font-bold text-lg">{title}</h3>
+      <h3 className="font-bold text-lg">{slicer(title, 20)}</h3>
       <p>{slicer(description)}</p>
       <div className="flex items-center my-4 space-x-2">
         {colors.length > 0 ? (

@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import ProductCard from "./components/ProductCard";
 import { categories, colors, formInputsList, productList } from "./data";
 import Modal from "./components/ui/Modal";
@@ -13,6 +13,7 @@ import Select from "./components/ui/Select";
 import toast, { Toaster } from "react-hot-toast";
 
 function App() {
+  /*------------------toast---------------- */
   const notify = () =>
     toast("Product Deleted", {
       icon: "👏",
@@ -104,7 +105,7 @@ function App() {
     });
   };
 
-  function cancelHandler(event: MouseEvent<HTMLButtonElement>): void {
+  function cancelHandler(): void {
     setProduct(initialProduct);
 
     closeModal();
@@ -130,16 +131,21 @@ function App() {
       setErrorsObject(errors);
       return;
     }
-    setProducts((prev) => [
+    const arr=[
       {
         ...product,
         id: uuid(),
         colors: tempColors,
         category: selectedCategory,
       },
-      ...prev,
-    ]);
+      ...products,
+    ]
+    setProducts( arr);
 
+
+    localStorage.setItem("products", JSON.stringify(arr));
+    
+ 
     closeModal();
     setProduct(initialProduct);
     setTempColors([]);
@@ -148,14 +154,14 @@ function App() {
   const submitEditHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    const { title, description, imageURL, price, colors } = productToEdit;
+    const { title, description, imageURL, price } = productToEdit;
 
     const errors = validateProduct({
       title,
       description,
       imageURL,
       price,
-      colors:tempColors.concat(productToEdit.colors),
+      colors: tempColors.concat(productToEdit.colors),
     });
 
     const hasNoErrorMsg =
@@ -172,18 +178,30 @@ function App() {
       colors: tempColors.concat(productToEdit.colors),
     };
     setProducts(updated);
-
+    localStorage.setItem("products", JSON.stringify(updated));
     closeEditModal();
     setProductToEdit(initialProduct);
     setTempColors([]);
     notify2();
   };
   const removeHandler = () => {
+    
     const updated = [...products].filter((e) => e.id !== productToEdit.id);
     setProducts(updated);
+    localStorage.setItem("products", JSON.stringify(updated));
     closeConfirmModal();
     notify();
   };
+  /*----------------local storage---------------*/
+  useEffect(() => {
+    const items = localStorage.getItem("products");
+    if (items) {
+      setProducts(JSON.parse(items));
+    } else {
+      setProducts(productList);
+    }
+  }, []);
+
   /*------------render------------------*/
 
   return (

@@ -5,6 +5,6 @@
  * @returns the sliced text
  */
 export function slicer(txt:string,max:number=90) {
-    return txt.length > 100 ? `${txt.slice(0, max)}...` : txt
+    return txt.length > max ? `${txt.slice(0, max)}...` : txt
 
 }
