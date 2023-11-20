@@ -1,6 +1,10 @@
 # Deployment
 
-This is the deployed project on [netlify](https://ahmed-mahmoud-product-builder.netlify.app/) .
+This is the deployed project on [netlify](https://ahmed-mahmoud-product-builder.netlify.app/).
+
+# Demo
+
+https://github.com/ahmed1532/product-builder/assets/73766187/7c608636-5111-4551-aea8-595284a82fb1
 
 
 # React + TypeScript + Vite
